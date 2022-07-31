@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	transporthttp "github.com/ResAPI-Heman/Firstone/internal/transport/http"
+	transporthttp "github.com/himanshunagar33/ProductionReadyApiDev"
 )
 
 // App - struct which contains things like pointers to database connections
