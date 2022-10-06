@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	transporthttp "github.com/himanshunagar33/ProductionReadyApiDev"
+	"github.com/himanshunagar33/ProductionReadyApiDev/internal/comments"
+	"github.com/himanshunagar33/ProductionReadyApiDev/internal/database"
+	transporthttp "github.com/himanshunagar33/ProductionReadyApiDev/internal/transport/http"
 )
 
 // App - struct which contains things like pointers to database connections
@@ -12,8 +14,16 @@ type App struct{}
 
 func (app *App) Run() error {
 	fmt.Println("Setting up our APP")
+
+	var err error
+	db, err := database.NewDatabase()
+	if err != nil {
+		return err
+	}
+	commentService := comments.NewService(db)
+
 	handler := transporthttp.NewHandler()
-	handler.setupRoutes()
+	handler.SetupRoutes()
 	if err := http.ListenAndServe(":8080", handler.Router); err != nil {
 		fmt.Println("failed to set up  server")
 		return err

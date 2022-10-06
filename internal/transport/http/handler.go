@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/himanshunagar33/ProductionReadyApiDev/internal/comments"
 )
 
 //handler -stores the pointer to our comments service
 type Handler struct {
-	Router *mux.Router
+	Router  *mux.Router
+	Service *comments.Service
 }
 
 func NewHandler() *Handler {
